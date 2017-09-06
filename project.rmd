@@ -2,7 +2,9 @@
 title: "StroopProject"
 author: "David Vartanian"
 date: "5 September 2017"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -16,8 +18,9 @@ library(gridExtra)
 data <- read_csv("data/stroopdata.csv")
 ```
 
-```{r echo=FALSE functions}
-plot_histogram <- function(x, xlabel = '', colour = I('#6688CC'), title = '', bins = 20) {
+```{r functions}
+plot_histogram <- function(x, xlabel = '', colour = I('#6688CC'), title = '', 
+                           bins = 20) {
   plot <- ggplot(aes(x = x), data = data) +
     geom_histogram(aes(colour = colour), bins = bins) +
     xlab(xlabel) +
@@ -29,42 +32,48 @@ plot_histogram <- function(x, xlabel = '', colour = I('#6688CC'), title = '', bi
 # Stroop - Perceptual Phenomenon
 ### by David Vartanian
 
-Link to the test: https://faculty.washington.edu/chudler/java/ready.html
-Link to t-table: https://s3.amazonaws.com/udacity-hosted-downloads/t-table.jpg
+* Link to the test: https://faculty.washington.edu/chudler/java/ready.html
+* Link to t-table: https://s3.amazonaws.com/udacity-hosted-downloads/t-table.jpg
 
 ### 1. What is our independent variable? What is our dependent variable?
-- is this a pre-test post-test? if so, Congruent is independent, Incongruent is dependent
-Pre-test Post-test Design
-Independent Variable: Congruent
-Dependent Variable: Incongruent
 
-Meet specifications: Q1: Question response correctly identifies the independent and dependent variables in the experiment.
+Independent variable (predictor): Congruent and Incongruent.
+
+Dependent variable (outcome): Time spent by people to complete each test.
 
 ### 2. What is an appropriate set of hypotheses for this task? What kind of statistical test do you expect to perform? Justify your choices.
-- null hypothesis: the time to complete the second test is not significantly different
-- alternative hypothesis: the time to complete the second test is significantly higher
 
-Meet specifications:
-- Q2a: Null and alternative hypotheses are clearly stated in words and mathematically. Symbols in the mathematical statement are defined.
-- Q2b: A statistical test is proposed which will distinguish the proposed hypotheses. Any assumptions made by the statistical test are addressed.
+$$H_0: \mu_c = \mu_i$$
+
+The *null* hypothesis means that no changes would be seen after the testing.
+
+$$H_a: \mu_c < \mu_i$$
+
+The *alternative* hypothesis means that the *Congruent* test would spend
+significantly less time to complete the test than the *Incongruent* test.
 
 ### 3. Report some descriptive statistics regarding this dataset. Include at least one measure of central tendency and at least one measure of variability.
-- count, min, max on both Congruent and Incongruent variables
-- mean, median times (Congruent, Incongruent)
-```{r}
+
+```{r echo=TRUE}
+# Count:
+nrow(data)
+```
+
+```{r echo=TRUE}
+# Min, max, mean:
 summary(data)
 ```
-- variance, standard deviation
-```{r}
+
+```{r echo=TRUE}
+# Variance:
 var(data)
+# Congruent Standard Deviation
 sd(data$Congruent)
+# Incongruent Standard Deviation
 sd(data$Incongruent)
 ```
 
-Meet specifications: Q3: Descriptive statistics, including at least one measure of centrality and one measure of variability, have been computed for the dataset’s groups.
-
 ### 4. Provide one or two visualizations that show the distribution of the sample data. Write one or two sentences noting what you observe about the plot or plots.
-- plot distribution
 
 ```{r}
 p1 <- plot_histogram(data$Congruent, bins = 8, xlabel = 'Congruent', title = 'Congruent Distribution')
@@ -72,11 +81,7 @@ p2 <- plot_histogram(data$Incongruent, bins = 8, xlabel = 'Incongruent', title =
 grid.arrange(p1, p2, ncol = 2)
 ```
 
-Meet specifications: Q4: One or two visualizations have been created that show off the data, including comments on what can be observed in the plot or plots.
-
 ### 5. Now, perform the statistical test and report your results. What is your confidence level and your critical statistic value? Do you reject the null hypothesis or fail to reject it? Come to a conclusion in terms of the experiment task. Did the results match up with your expectations?
-calculate:
-  - sample mean difference
 
 ```{r}
 Xbar <- mean(data$Congruent)
@@ -95,60 +100,57 @@ ci <- t.critical * (STD / sqrt(N))
 ci.upper <- point.estimate + ci
 reject.null <- t.statistic > ci.upper
 p.value <- 0.0001  # t=-8.020707   DF=23
-
-ggplot(aes(x = Congruent, y = Incongruent), data = data) +
-  geom_point() +
-  geom_smooth(method = 'lm', size = 1, se = FALSE)
 ```
 
-```{r}
-data2 <- rbind(data, data)
-Xbar <- mean(data2$Congruent)
-Ybar <- mean(data2$Incongruent)
-N <- nrow(data2)
-point.estimate <- Ybar - Xbar
-D <- data2$Incongruent - data2$Congruent
-square.deviation <- (D - point.estimate)^2
-variance <- sum(square.deviation) / (N - 1)
-STD <- sqrt(variance)
-t.statistic <- (point.estimate / (STD / sqrt(N)))
-standard.error <- STD / sqrt(N)
-cohens.d <- point.estimate / STD
-t.critical <- 1.676  # from t-table: 23DF, alpha .95, one-tailed
-ci <- t.critical * (STD / sqrt(N))
-ci.upper <- point.estimate + ci
-reject.null <- t.statistic > ci.upper
-p.value <- 0.0310  # t=-2.29744   DF=23
+* $\mu_c = `r Xbar`$
+* $\mu_i = `r Ybar`$
+* $N = `r N`$
+* Point Estimate ($\mu_c - \mu_i$) = `r point.estimate`
+* Variance = `r variance`
+* Standard Deviation = `r STD`
+* T-Statistic = `r t.statistic`
+* Standard Error = `r standard.error`
+* T-Critical = `r t.critical` (from t-table: 23DF, alpha .95, one-tailed)
+* Confidence Interval = `r ci`
+* CI - Upper = `r ci.upper`
+* P-Value = `r p.value`
+* Reject NULL = `r reject.null`
 
-ggplot(aes(x = Congruent, y = Incongruent), data = data) +
-  geom_point() +
-  geom_smooth(method = 'lm', size = 1, se = FALSE)
-```
-
-  - standard deviation of the mean
-  - t-critical
-  - t-statistic
-  - standard error
-  - confidence interval
-  - p-value
-  - statistical significance
-  - comments about statistic
-
-> Meet specifications: Q5: A statistical test has been correctly performed and reported, including test statistic, p-value, and test result. The test results are interpreted in terms of the experimental task performed.
-
+At the beginning it didn't match my expectations, because after doing the test
+myself, I noticed a considerable difference between both congruent and 
+incongruent parts. But with less than 30 observations in the dataset it's quite 
+obvious that the Confidence Interval would be huge. Therefore, the T-Statistic 
+would not be far enough to cross the T-Critical value in order to reject the 
+NULL. In my opinion, duplicating the number of observations would be enough to 
+get a more real result.
 
 ### 6. Optional: What do you think is responsible for the effects observed? Can you think of an alternative or similar task that would result in a similar effect? Some research about the problem will be helpful for thinking about these two questions!
-make some research about the cientific reason of taking so much more time when colour words have different colours
 
-Meet specifications: Q6: Hypotheses regarding the reasons for the effect observed are presented. An extension or related experiment to the performed Stroop task is provided, that may produce similar effects.
+The effect is caused by a conflict between what for the brain is easier (words)
+and what we need to pay attention to (colours).
 
+Extracted from the Stroop Effect website:
 
-
-
-
-
-
-
+> The words themselves have a strong influence over your ability to say the 
+color. The interference between the different information (what the words say 
+and the color of the words) your brain receives causes a problem. There are two 
+theories that may explain the Stroop effect:
+>
+> Speed of Processing Theory: the interference occurs because words are read 
+faster than colors are named.
+Selective Attention Theory: the interference occurs because naming colors 
+requires more attention than reading words.
+>
+>More experiments to try:
+>
+>* Turn the words upside down or rotate them 90 degrees.
+>* Turn the words "inside out."
+>* Use non-color words such as "dog" or "house."
+>* Use nonsense words such as "kiw" or "thoz."
+>* Compare long words to short words.
+>* Use emotional words such as "sad" or "happy" or "depressed" or "angry."
+>* Color only half of the word or color only the first and last letter of each 
+word.
 
 
 
