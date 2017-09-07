@@ -43,10 +43,11 @@ Dependent variable (outcome): Time spent by people to complete each test.
 
 ### 2. What is an appropriate set of hypotheses for this task? What kind of statistical test do you expect to perform? Justify your choices.
 We are trying to test whether the difference in time between taking the two 
-tests is significant, using $\mu_c$ as the mean time samples of the *Congruent* 
-test, and $\mu_i$ as the mean time samples of the *Incongruent* test. Since we
+tests is significant. I will use $\mu_c$ as the sample mean of the *Congruent* 
+variable, and $\mu_i$ as the sample mean of the *Incongruent* variable. Since we
 don't have population data, the following hypotheses are based only on sample
-data.
+data. This means that we don't have population information and I will need to
+infere it from the sample data.
 
 $$H_0: \mu_c = \mu_i$$
 
