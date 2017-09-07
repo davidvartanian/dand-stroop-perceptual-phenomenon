@@ -139,10 +139,12 @@ $(document).ready(function () {
 </div>
 <div id="what-is-an-appropriate-set-of-hypotheses-for-this-task-what-kind-of-statistical-test-do-you-expect-to-perform-justify-your-choices." class="section level3">
 <h3>2. What is an appropriate set of hypotheses for this task? What kind of statistical test do you expect to perform? Justify your choices.</h3>
+<p>We are trying to test whether the difference in time between taking the two tests is significant, using <span class="math inline">\(\mu_c\)</span> as the mean time samples of the <em>Congruent</em> test, and <span class="math inline">\(\mu_i\)</span> as the mean time samples of the <em>Incongruent</em> test.</p>
 <p><span class="math display">\[H_0: \mu_c = \mu_i\]</span></p>
-<p>The <em>null</em> hypothesis means that no changes would be seen after the testing.</p>
+<p>The <em>null</em> hypothesis expects that the difference between <span class="math inline">\(\mu_c\)</span> and <span class="math inline">\(\mu_i\)</span> will not statistically significant.</p>
 <p><span class="math display">\[H_a: \mu_c &lt; \mu_i\]</span></p>
-<p>The <em>alternative</em> hypothesis means that the <em>Congruent</em> test would spend significantly less time to complete the test than the <em>Incongruent</em> test.</p>
+<p>On the other hand, the <em>alternative</em> hypothesis expects that <span class="math inline">\(\mu_c\)</span> will be significantly less than <span class="math inline">\(\mu_i\)</span>.</p>
+<p>Since I don’t know the population standard deviation and less than 30 observations are provided in this dataset, I will use paired T-Test this time.</p>
 </div>
 <div id="report-some-descriptive-statistics-regarding-this-dataset.-include-at-least-one-measure-of-central-tendency-and-at-least-one-measure-of-variability." class="section level3">
 <h3>3. Report some descriptive statistics regarding this dataset. Include at least one measure of central tendency and at least one measure of variability.</h3>

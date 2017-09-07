@@ -3,8 +3,8 @@ title: "StroopProject"
 author: "David Vartanian"
 date: "5 September 2017"
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -42,15 +42,22 @@ Independent variable (predictor): Congruent and Incongruent.
 Dependent variable (outcome): Time spent by people to complete each test.
 
 ### 2. What is an appropriate set of hypotheses for this task? What kind of statistical test do you expect to perform? Justify your choices.
+We are trying to test whether the difference in time between taking the two 
+tests is significant, using $\mu_c$ as the mean time samples of the *Congruent* 
+test, and $\mu_i$ as the mean time samples of the *Incongruent* test.
 
 $$H_0: \mu_c = \mu_i$$
 
-The *null* hypothesis means that no changes would be seen after the testing.
+The *null* hypothesis expects that the difference between $\mu_c$ and $\mu_i$
+will not statistically significant.
 
 $$H_a: \mu_c < \mu_i$$
 
-The *alternative* hypothesis means that the *Congruent* test would spend
-significantly less time to complete the test than the *Incongruent* test.
+On the other hand, the *alternative* hypothesis expects that $\mu_c$ will be 
+significantly less than $\mu_i$.
+
+Since I don't know the population standard deviation and less than 30 
+observations are provided in this dataset, I will use paired T-Test this time.
 
 ### 3. Report some descriptive statistics regarding this dataset. Include at least one measure of central tendency and at least one measure of variability.
 
