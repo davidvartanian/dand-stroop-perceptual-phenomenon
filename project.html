@@ -139,11 +139,11 @@ $(document).ready(function () {
 </div>
 <div id="what-is-an-appropriate-set-of-hypotheses-for-this-task-what-kind-of-statistical-test-do-you-expect-to-perform-justify-your-choices." class="section level3">
 <h3>2. What is an appropriate set of hypotheses for this task? What kind of statistical test do you expect to perform? Justify your choices.</h3>
-<p>We are trying to test whether the difference in time between taking the two tests is significant. I will use <span class="math inline">\(\bar{C}\)</span> as the sample mean of the <em>Congruent</em> variable, and <span class="math inline">\(\bar{I}\)</span> as the sample mean of the <em>Incongruent</em> variable. Since we don’t have population data, the following hypotheses are based only on sample data. This means that we don’t have population information and I will need to infere it from the sample data.</p>
-<p><span class="math display">\[H_0: \bar{C} = \bar{I}\]</span></p>
-<p>The <em>null</em> hypothesis expects that the difference between <span class="math inline">\(\bar{C}\)</span> and <span class="math inline">\(\bar{I}\)</span> will not statistically significant.</p>
-<p><span class="math display">\[H_a: \bar{C} &lt; \bar{I}\]</span></p>
-<p>On the other hand, the <em>alternative</em> hypothesis expects that <span class="math inline">\(\bar{C}\)</span> will be significantly less than <span class="math inline">\(\bar{I}\)</span>.</p>
+<p>We are trying to test whether the difference in time between taking the two tests is significant, using <span class="math inline">\(\mu_c\)</span> as the mean population of the <em>Congruent</em> test, and <span class="math inline">\(\mu_i\)</span> as the mean population of the <em>Incongruent</em> test.</p>
+<p><span class="math display">\[H_0: \mu_c = \mu_i\]</span></p>
+<p>The <em>null</em> hypothesis expects that the difference between <span class="math inline">\(\mu_c\)</span> and <span class="math inline">\(\mu_i\)</span> will not statistically significant.</p>
+<p><span class="math display">\[H_a: \mu_c &lt; \mu_i\]</span></p>
+<p>On the other hand, the <em>alternative</em> hypothesis expects that <span class="math inline">\(\mu_c\)</span> will be significantly less than <span class="math inline">\(\mu_i\)</span>.</p>
 <p>Since I don’t know the population standard deviation and less than 30 observations are provided in this dataset, I will use paired T-Test this time.</p>
 </div>
 <div id="report-some-descriptive-statistics-regarding-this-dataset.-include-at-least-one-measure-of-central-tendency-and-at-least-one-measure-of-variability." class="section level3">
@@ -179,10 +179,10 @@ sd(data$Incongruent)</code></pre>
 <div id="now-perform-the-statistical-test-and-report-your-results.-what-is-your-confidence-level-and-your-critical-statistic-value-do-you-reject-the-null-hypothesis-or-fail-to-reject-it-come-to-a-conclusion-in-terms-of-the-experiment-task.-did-the-results-match-up-with-your-expectations" class="section level3">
 <h3>5. Now, perform the statistical test and report your results. What is your confidence level and your critical statistic value? Do you reject the null hypothesis or fail to reject it? Come to a conclusion in terms of the experiment task. Did the results match up with your expectations?</h3>
 <ul>
-<li><span class="math inline">\(\bar{C} = 14.051125\)</span></li>
-<li><span class="math inline">\(\bar{I} = 22.0159167\)</span></li>
+<li><span class="math inline">\(\mu_c = 14.051125\)</span></li>
+<li><span class="math inline">\(\mu_i = 22.0159167\)</span></li>
 <li><span class="math inline">\(N = 24\)</span></li>
-<li>Point Estimate (<span class="math inline">\(\bar{C} - \bar{I}\)</span>) = -7.9647917</li>
+<li>Point Estimate (<span class="math inline">\(\mu_c - \mu_i\)</span>) = -7.9647917</li>
 <li>Variance = 23.6665409</li>
 <li>Standard Deviation = 4.8648269</li>
 <li>T-Statistic = -8.0207069</li>

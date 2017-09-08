@@ -43,21 +43,18 @@ Dependent variable (outcome): Time spent by people to complete each test.
 
 ### 2. What is an appropriate set of hypotheses for this task? What kind of statistical test do you expect to perform? Justify your choices.
 We are trying to test whether the difference in time between taking the two 
-tests is significant. I will use $\bar{C}$ as the sample mean of the *Congruent* 
-variable, and $\bar{I}$ as the sample mean of the *Incongruent* variable. Since we
-don't have population data, the following hypotheses are based only on sample
-data. This means that we don't have population information and I will need to
-infere it from the sample data.
+tests is significant, using $\mu_c$ as the mean population of the *Congruent* 
+test, and $\mu_i$ as the mean population of the *Incongruent* test.
 
-$$H_0: \bar{C} = \bar{I}$$
+$$H_0: \mu_c = \mu_i$$
 
-The *null* hypothesis expects that the difference between $\bar{C}$ and $\bar{I}$
+The *null* hypothesis expects that the difference between $\mu_c$ and $\mu_i$
 will not statistically significant.
 
-$$H_a: \bar{C} < \bar{I}$$
+$$H_a: \mu_c < \mu_i$$
 
-On the other hand, the *alternative* hypothesis expects that $\bar{C}$ will be 
-significantly less than $\bar{I}$.
+On the other hand, the *alternative* hypothesis expects that $\mu_c$ will be 
+significantly less than $\mu_i$.
 
 Since I don't know the population standard deviation and less than 30 
 observations are provided in this dataset, I will use paired T-Test this time.
@@ -112,10 +109,10 @@ reject.null <- t.statistic > ci.upper
 p.value <- 0.0001  # t=-8.020707   DF=23
 ```
 
-* $\bar{C} = `r Xbar`$
-* $\bar{I} = `r Ybar`$
+* $\mu_c = `r Xbar`$
+* $\mu_i = `r Ybar`$
 * $N = `r N`$
-* Point Estimate ($\bar{C} - \bar{I}$) = `r point.estimate`
+* Point Estimate ($\mu_c - \mu_i$) = `r point.estimate`
 * Variance = `r variance`
 * Standard Deviation = `r STD`
 * T-Statistic = `r t.statistic`
