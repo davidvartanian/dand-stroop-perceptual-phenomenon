@@ -43,8 +43,8 @@ Dependent variable (outcome): Time spent by people to complete each test.
 
 ### 2. What is an appropriate set of hypotheses for this task? What kind of statistical test do you expect to perform? Justify your choices.
 We are trying to test whether the difference in time between taking the two 
-tests is significant, using $\mu_c$ as the mean population of the *Congruent* 
-test, and $\mu_i$ as the mean population of the *Incongruent* test.
+tests is significant. I will use $\mu_c$ to represent the infered population
+mean for the *Congruent* test, and $\mu_i$ for the *Incongruent* test.
 
 $$H_0: \mu_c = \mu_i$$
 
@@ -57,7 +57,10 @@ On the other hand, the *alternative* hypothesis expects that $\mu_c$ will be
 significantly less than $\mu_i$.
 
 Since I don't know the population standard deviation and less than 30 
-observations are provided in this dataset, I will use paired T-Test this time.
+observations are provided in this dataset, I will use perform a T-Test. Which
+in this case will be a *paired t-test*, since each subject was measured twice to 
+get both Congruent and Incongruent values, meaning that the observations of both 
+variables are connected.
 
 ### 3. Report some descriptive statistics regarding this dataset. Include at least one measure of central tendency and at least one measure of variability.
 
@@ -83,10 +86,17 @@ sd(data$Incongruent)
 ### 4. Provide one or two visualizations that show the distribution of the sample data. Write one or two sentences noting what you observe about the plot or plots.
 
 ```{r}
-p1 <- plot_histogram(data$Congruent, bins = 8, xlabel = 'Congruent', title = 'Congruent Distribution')
-p2 <- plot_histogram(data$Incongruent, bins = 8, xlabel = 'Incongruent', title = 'Incongruent Distribution')
+p1 <- plot_histogram(data$Congruent, bins = 6, xlabel = 'seconds', title = 'Congruent Distribution') + 
+  scale_x_continuous(breaks = seq(0, 30, 5))
+p2 <- plot_histogram(data$Incongruent, bins = 6, xlabel = 'seconds', title = 'Incongruent Distribution') + 
+  scale_x_continuous(breaks = seq(0, 35, 5))
 grid.arrange(p1, p2, ncol = 2)
 ```
+
+Ranges in X axis are actually different in both histograms. As you can see,
+most of observations are located around 15 seconds in the Congruent histogram, 
+while in the Incongruent histogram, most of observations are located between 20 
+and 25 seconds.
 
 ### 5. Now, perform the statistical test and report your results. What is your confidence level and your critical statistic value? Do you reject the null hypothesis or fail to reject it? Come to a conclusion in terms of the experiment task. Did the results match up with your expectations?
 
@@ -123,13 +133,14 @@ p.value <- 0.0001  # t=-8.020707   DF=23
 * P-Value = `r p.value`
 * Reject NULL = `r reject.null`
 
-At the beginning it didn't match my expectations, because after doing the test
-myself, I noticed a considerable difference between both congruent and 
-incongruent parts. But with less than 30 observations in the dataset it's quite 
-obvious that the Confidence Interval would be huge. Therefore, the T-Statistic 
-would not be far enough to cross the T-Critical value in order to reject the 
-NULL. In my opinion, duplicating the number of observations would be enough to 
-get a more real result.
+At the beginning the test results didn't match my expectations, because after 
+doing the test myself, I noticed a considerable difference between both 
+Congruent and Incongruent parts, and I noticed the same looking at the 
+histograms. But with less than 30 observations in the dataset it's quite obvious 
+that the Confidence Interval would be huge. Therefore, the T-Statistic would not 
+be far enough to cross the T-Critical value in order to reject the null 
+hypothesis. In my opinion, duplicating the number of observations would be 
+enough to get a more real result.
 
 ### 6. Optional: What do you think is responsible for the effects observed? Can you think of an alternative or similar task that would result in a similar effect? Some research about the problem will be helpful for thinking about these two questions!
 
